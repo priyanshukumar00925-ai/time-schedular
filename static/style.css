@@ -1,0 +1,498 @@
+/*
+ * style.css - Clean, modern, responsive styling for Timetable Scheduler
+ * Uses pure Vanilla CSS, Arial sans-serif typography, CSS Grid, and subtle shadows.
+ */
+
+:root {
+    --bg-page: #f1f5f9;
+    --card-bg: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --border-focus: #3b82f6;
+    
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --secondary-color: #f8fafc;
+    --secondary-hover: #e2e8f0;
+    --danger-color: #ef4444;
+    --danger-hover: #dc2626;
+    
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    
+    --shadow-card: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+    --shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.05);
+}
+
+/* Reset and Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    line-height: 1.5;
+    padding: 30px 16px;
+    min-height: 100vh;
+}
+
+/* Layout Wrappers */
+.page-wrapper {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+.page-wrapper.full-width {
+    max-width: 1100px;
+}
+
+/* Main White Card Container */
+.main-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-color);
+    padding: 36px 40px;
+}
+
+/* Header Elements */
+.app-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: #dbeafe;
+    color: var(--primary-color);
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.badge.success {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.app-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+}
+
+/* Alert Notification Banner */
+.alert-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    border-radius: var(--radius-md);
+    margin-bottom: 24px;
+    font-size: 14px;
+}
+
+.alert-box.error {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+}
+
+.alert-icon {
+    font-size: 18px;
+}
+
+/* Toolbar & Guidance */
+.form-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.info-text {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* Desktop Header Row for Subject Grid */
+.subject-header-row {
+    display: grid;
+    grid-template-columns: 2.5fr 2.5fr 1.3fr 44px;
+    gap: 14px;
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0 4px 8px 4px;
+}
+
+/* Dynamic Subject Input Row (CSS Grid Required) */
+.subject-row {
+    display: grid;
+    grid-template-columns: 2.5fr 2.5fr 1.3fr 44px;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 12px;
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-label {
+    display: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+/* Form Inputs */
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-main);
+    background: #ffffff;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* Action Buttons */
+.action-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-remove {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    border: 1px solid #fecaca;
+    background: #fff1f2;
+    color: var(--danger-color);
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-remove:hover {
+    background: var(--danger-color);
+    color: #ffffff;
+    border-color: var(--danger-hover);
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 22px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
+
+.btn-secondary {
+    background: #f8fafc;
+    color: #334155;
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background: #e2e8f0;
+    color: var(--text-main);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--primary-color);
+    border: 1px solid #bfdbfe;
+}
+
+.btn-outline:hover {
+    background: #eff6ff;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    gap: 12px;
+}
+
+/* Timetable Result Page Styles */
+.stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+    background: #f8fafc;
+    padding: 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-top: 2px;
+}
+
+/* Timetable Table Grid */
+.table-responsive {
+    overflow-x: auto;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 28px;
+}
+
+.timetable-grid {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 720px;
+    background: #ffffff;
+}
+
+.timetable-grid th {
+    background-color: #1e293b;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 14px 12px;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.timetable-grid th.time-header {
+    width: 15%;
+    background-color: #0f172a;
+}
+
+.timetable-grid td {
+    padding: 12px 10px;
+    border: 1px solid var(--border-color);
+    vertical-align: middle;
+    text-align: center;
+}
+
+.time-cell {
+    background-color: #f8fafc;
+    font-weight: bold;
+    color: #334155;
+    white-space: nowrap;
+}
+
+.time-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #475569;
+    background: #e2e8f0;
+    border-radius: var(--radius-sm);
+}
+
+.class-card {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-left: 4px solid var(--primary-color);
+    border-radius: var(--radius-sm);
+    padding: 8px 10px;
+    text-align: left;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.subject-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e3a8a;
+    line-height: 1.3;
+}
+
+.teacher-subtitle {
+    font-size: 11px;
+    color: #475569;
+    margin-top: 4px;
+}
+
+.free-badge {
+    display: inline-block;
+    font-size: 12px;
+    color: #94a3b8;
+    font-style: italic;
+    padding: 6px 12px;
+    background: #f8fafc;
+    border-radius: var(--radius-sm);
+    border: 1px dashed #cbd5e1;
+}
+
+.timetable-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Footer Section */
+.app-footer {
+    text-align: center;
+    margin-top: 32px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-color);
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* Responsive Stacking for Mobile Screens (Requirement Section 8) */
+@media (max-width: 768px) {
+    body {
+        padding: 16px 10px;
+    }
+
+    .main-card {
+        padding: 22px 18px;
+    }
+
+    .subject-header-row {
+        display: none; /* Hide desktop column labels */
+    }
+
+    .subject-row {
+        grid-template-columns: 1fr; /* Stack vertically on small screens */
+        background: #f8fafc;
+        padding: 14px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-color);
+        gap: 10px;
+    }
+
+    .mobile-label {
+        display: block; /* Show individual labels when stacked */
+    }
+
+    .action-cell {
+        justify-content: flex-end;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+    }
+
+    .timetable-actions {
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+
+    .timetable-actions .btn {
+        width: 100%;
+    }
+}
+
+/* Clean Print Styles for printing or PDF export */
+@media print {
+    body {
+        background: #ffffff;
+        padding: 0;
+    }
+
+    .main-card {
+        box-shadow: none;
+        border: none;
+        padding: 0;
+    }
+
+    .timetable-actions,
+    .app-footer,
+    .badge {
+        display: none !important;
+    }
+
+    .timetable-grid th {
+        background-color: #334155 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .class-card {
+        border-left-color: #000 !important;
+    }
+}

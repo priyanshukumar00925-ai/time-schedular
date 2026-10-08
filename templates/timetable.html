@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📅 Generated Timetable</title>
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page-wrapper full-width">
+        <main class="main-card timetable-card">
+            <!-- Header Section -->
+            <header class="app-header">
+                <div class="badge success">Generated Successfully</div>
+                <h1>📅 Generated Timetable</h1>
+                <p class="subtitle">Weekly schedule generated and saved to <code>data/timetable.json</code>.</p>
+            </header>
+
+            <!-- Timetable Summary Stats Bar -->
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-label">Total Scheduled</span>
+                    <span class="stat-value">{{ total_classes }} classes</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Free Slots</span>
+                    <span class="stat-value">{{ available_slots - total_classes }} periods</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Working Days</span>
+                    <span class="stat-value">5 Days (Mon - Fri)</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Daily Slots</span>
+                    <span class="stat-value">6 Hours / Day</span>
+                </div>
+            </div>
+
+            <!-- Responsive Table Container -->
+            <div class="table-responsive">
+                <table class="timetable-grid" id="printable-timetable">
+                    <thead>
+                        <tr>
+                            <th class="time-header">Time</th>
+                            {% for day in days %}
+                            <th>{{ day }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for slot in time_slots %}
+                        <tr>
+                            <!-- Row header: Time Slot -->
+                            <td class="time-cell">
+                                <span class="time-badge">{{ slot }}</span>
+                            </td>
+
+                            <!-- Day columns for this time slot -->
+                            {% for day in days %}
+                            {% set class_info = timetable[day][slot] %}
+                            <td class="slot-cell">
+                                {% if class_info %}
+                                <div class="class-card">
+                                    <div class="subject-title">{{ class_info.subject }}</div>
+                                    <div class="teacher-subtitle">👨‍🏫 {{ class_info.teacher }}</div>
+                                </div>
+                                {% else %}
+                                <div class="free-badge">Free</div>
+                                {% endif %}
+                            </td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="timetable-actions">
+                <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                    ← Generate Again
+                </a>
+                <button type="button" class="btn btn-primary" onclick="window.print()">
+                    🖨️ Print / Save PDF
+                </button>
+            </div>
+
+            <!-- Footer note -->
+            <footer class="app-footer">
+                <p>Timetable Scheduler • JSON Data saved in <code>data/timetable.json</code></p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

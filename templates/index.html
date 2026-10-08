@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📅 Timetable Scheduler</title>
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page-wrapper">
+        <main class="main-card">
+            <!-- Header Section -->
+            <header class="app-header">
+                <div class="badge">College Academic Tool</div>
+                <h1>📅 Timetable Scheduler</h1>
+                <p class="subtitle">Enter your subjects and generate your timetable automatically.</p>
+            </header>
+
+            <!-- Error Notification Banner if validation fails -->
+            {% if error %}
+            <div class="alert-box error">
+                <span class="alert-icon">⚠️</span>
+                <span>{{ error }}</span>
+            </div>
+            {% endif %}
+
+            <!-- Form submission to /generate -->
+            <form action="{{ url_for('generate') }}" method="POST" id="schedule-form" onsubmit="return validateForm()">
+                
+                <!-- Quick Fill Helper for Demo / Viva Testing -->
+                <div class="form-toolbar">
+                    <span class="info-text">Weekly capacity: <strong>30 slots</strong> (5 days × 6 hours)</span>
+                    <button type="button" class="btn btn-outline btn-sm" onclick="loadSampleData()">
+                        ⚡ Fill Sample Data
+                    </button>
+                </div>
+
+                <!-- Desktop Table Headers -->
+                <div class="subject-header-row">
+                    <div>Subject Name</div>
+                    <div>Teacher Name</div>
+                    <div>Classes / Week</div>
+                    <div style="text-align: center;">Action</div>
+                </div>
+
+                <!-- Dynamic Subject Rows Container -->
+                <div id="subject-container">
+                    <!-- Initial Row 1 -->
+                    <div class="subject-row">
+                        <div class="form-group">
+                            <label class="mobile-label">Subject Name</label>
+                            <input 
+                                type="text" 
+                                name="subject[]" 
+                                placeholder="e.g. Artificial Intelligence" 
+                                required
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label class="mobile-label">Teacher Name</label>
+                            <input 
+                                type="text" 
+                                name="teacher[]" 
+                                placeholder="e.g. Dr. Sharma" 
+                                required
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label class="mobile-label">Classes/Week</label>
+                            <input 
+                                type="number" 
+                                name="classes[]" 
+                                min="1" 
+                                max="30" 
+                                placeholder="e.g. 4" 
+                                required
+                            >
+                        </div>
+                        <div class="action-cell">
+                            <button type="button" class="btn-remove" onclick="removeSubject(this)" title="Remove this subject">✕</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button Controls -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="addSubject()">
+                        + Add Subject
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Generate Timetable
+                    </button>
+                </div>
+            </form>
+
+            <!-- Footer note -->
+            <footer class="app-footer">
+                <p>Designed for B.Tech CSE / AI Projects • Built with Python & Flask</p>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Link to external vanilla JavaScript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
