@@ -10,15 +10,12 @@ import json
 from flask import Flask, render_template, request, redirect, url_for
 from scheduler import generate_timetable, DAYS, TIME_SLOTS
 
-# Initialize the Flask application
 app = Flask(__name__)
 
-# Base directory path to ensure relative paths work reliably
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, 'data')
 DATA_FILE = os.path.join(DATA_DIR, 'timetable.json')
 
-# Maximum available slots in a standard college week (5 days * 6 slots = 30)
 MAX_WEEKLY_SLOTS = len(DAYS) * len(TIME_SLOTS)
 
 
